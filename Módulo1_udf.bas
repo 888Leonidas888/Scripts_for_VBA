@@ -1,10 +1,10 @@
-Attribute VB_Name = "Módulo1_udf"
+Attribute VB_Name = "Mï¿½dulo1_udf"
 Function createPassword(Optional ByVal lenght = 6) As String
       Dim password$, character$, n%, i%, j%, a%
       Dim character_excluded(0 To 12) As Byte
-      'números del 48 al 57
-      'letras mayúsculas 65 al 90
-      'letras minúsculas 97 al 122
+      'nï¿½meros del 48 al 57
+      'letras mayï¿½sculas 65 al 90
+      'letras minï¿½sculas 97 al 122
    
       Rem Application.Volatile False
       
@@ -32,7 +32,8 @@ otra_vez:
       Next a
       
       createPassword = password
-      
+      rem estamos agregando un comentario para probar nuestro rama que hemos en creado en nuestro
+      rem repositorio
 End Function
 
 
