@@ -7,7 +7,7 @@
 
 - Descarga esta carpeta.
 
->[NOTE]
+>[!NOTE]
 > Las imagenes estan dentro de la carpeta .\img\
 
 ## Activa la siguiente referencia
