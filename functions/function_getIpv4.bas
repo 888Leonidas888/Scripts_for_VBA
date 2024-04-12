@@ -1,10 +1,14 @@
-Attribute VB_Name = "udfForVba"
-'Antes de usar esta función debes asegurarte de tener activadas las siguientes REFERENCIAS:
+Attribute VB_Name = "functionCustom"
+'Activa las sgtes referencias:
 
-'1.-Microsft Html Object Library
-'2.-Microsoft VBscript Regular Expressions 5.5
+'- Microsft Html Object Library
+'- Microsoft VBscript Regular Expressions 5.5
 
 Public Function getIpv4() As String
+    'Obtiene el Ipv4 de la mÃ¡quina.
+    '
+    'Returns:
+    '   string: La ip de la mÃ¡quina.
 
     Dim html As New MSHTML.HTMLDocument
     Dim text As String
@@ -28,7 +32,7 @@ Public Function getIpv4() As String
     arrIp = Split(text, vbCrLf)
 
     For i = LBound(arrIp) To UBound(arrIp)
-        If arrIp(i) Like "*Dirección IPv4*" Then
+        If arrIp(i) Like "*Direcciï¿½n IPv4*" Then
             ipLine = arrIp(i)
         End If
     Next i
