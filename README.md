@@ -1,6 +1,6 @@
 # Scripts for VBA
 
-Dentro de este repositorio encontrarás formularios, funciones personalizadas, 
+Dentro de este repositorio encontrarás formularios, funciones personalizadas,
 complementos para ayudarte en el desarrollo.
 
 Dentro de cada carpeta o función encontrarás las referencias que debes activar antes usarla.
@@ -9,6 +9,7 @@ Dentro de cada carpeta o función encontrarás las referencias que debes activar
 
 - [Crear un carrusel con VBA](./forms/carousel/README.md)
 - [Pasar información de un formulario a otro formulario](./forms/fromFrmToFrm/)
+- [Revisar inputs vacios antes de registrar y limpiar controles](./forms/isInputEmpty/)
 
 ## Funciones
 
