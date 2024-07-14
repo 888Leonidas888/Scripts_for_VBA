@@ -11,6 +11,7 @@ Dentro de cada carpeta o función encontrarás las referencias que debes activar
 - [Pasar información de un formulario a otro formulario](./forms/fromFrmToFrm/)
 - [Revisar inputs vacios antes de registrar y limpiar controles](./forms/isInputEmpty/)
 - [Login](./forms/login/)
+- [Calendario](./forms/calendar/)
 
 ## Funciones
 
