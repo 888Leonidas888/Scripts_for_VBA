@@ -90,3 +90,30 @@ Public Function encodeURI(ByVal queryParameters As String) As String
     encodeURI = queryParameters
     
 End Function
+Function createResource(resource() As Byte, resourcePathDestination As String) As Boolean
+    ' Crea un recurso a partir de un array de bytes y lo guarda en la ruta especificada.
+    '
+    ' Args:
+    '     resource (Byte()): Array de bytes que representa el recurso a escribir en el archivo.
+    '     resourcePathDestination (String): La ruta donde se guardará el archivo del recurso.
+    '
+    ' Returns:
+    '     Boolean: Devuelve True si el recurso se creó y guardó exitosamente.
+    '
+    ' Raises:
+    '     Error 40000: Si ocurre un error al escribir el recurso, se genera un error con el mensaje "Error writing resource".
+    Dim numFile As Byte
+
+    On Error GoTo Catch
+    
+    numFile = FreeFile
+    
+    Open resourcePathDestination For Binary Access Write As #numFile
+        Put #numFile, 1, resource
+    Close #numFile
+    
+    createResource = True
+    Exit Function
+Catch:
+    Err.Raise 40000, Description:="Error writing resource"
+End Function

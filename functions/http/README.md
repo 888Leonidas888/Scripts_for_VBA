@@ -8,6 +8,7 @@ Esta biblioteca VBA proporciona funciones para realizar solicitudes HTTP y codif
 - [Funciones](#funciones)
   - [HTTPRequests](#httprequests)
   - [encodeURI](#encodeuri)
+  - [createresource](#createresource)
 
 ## Instalación
 
@@ -66,4 +67,32 @@ encodedParams = encodeURI("name=John Doe&age=30")
 Debug.Print "Encoded Parameters: " & encodedParams
 'Encoded Parameters: name%3DJohn%20Doe&age%3D30
 ```
+### createResource
 
+La función `createResource` crea un recurso a partir de un array de bytes y lo guarda en la ruta especificada.
+
+#### Args:
+- `resource` (Byte()): Array de bytes que representa el recurso a escribir en el archivo.
+- `resourcePathDestination` (String): La ruta donde se guardará el archivo del recurso.
+
+#### Returns:
+- `Boolean`: Devuelve True si el recurso se creó y guardó exitosamente.
+
+#### Raises:
+- `Error 40000`: Si ocurre un error al escribir el recurso, se genera un error con el mensaje "Error writing resource".
+
+#### Ejemplo:
+
+```vb
+Dim myResource() As Byte
+' Rellenar el array de bytes con el recurso que deseas guardar
+Dim success As Boolean
+
+success = createResource(myResource, "C:\path\to\your\resource.jpg")
+
+If success Then
+    MsgBox "El recurso se guardó exitosamente."
+Else
+    MsgBox "Hubo un error al guardar el recurso."
+End If
+```
