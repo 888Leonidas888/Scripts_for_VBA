@@ -18,3 +18,4 @@ Dentro de cada carpeta o función encontrarás las referencias que debes activar
 
 - [Obterner IP local](./functions/getIPV4/)
 - [Utilidad para peticiones HTTP](./functions/http/)
+- [Generar Qr](./functions/creatQR/)
