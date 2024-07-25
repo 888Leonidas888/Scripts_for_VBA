@@ -17,4 +17,4 @@ Dentro de cada carpeta o función encontrarás las referencias que debes activar
 ## Funciones
 
 - [Obterner IP local](./functions/getIPV4/)
-- [VBA HTTP requests](./functions/http/)
+- [Utilidad para peticiones HTTP](./functions/http/)
