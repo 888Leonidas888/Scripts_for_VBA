@@ -25,4 +25,4 @@ Abra el archivo [storage.xlsm](./storage.xlsm), habilite las macros para dar per
 
 # Enlaces
 
-- [iconos usados en este proyecto]("https://icon-icons.com/pack/Windows-8-Metro-Icons/17")
+- [iconos usados en este proyecto](https://icon-icons.com/pack/Windows-8-Metro-Icons/17)
