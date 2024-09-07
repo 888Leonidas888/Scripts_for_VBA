@@ -24,22 +24,29 @@ Private Sub Class_Initialize()
     Set self.cnn = New ADODB.Connection
             
 End Sub
+Private Function createStrConnection(Optional config As ADODB.Connection) As String
 
-Function connect()
+    Dim str As String
 
-    Dim strCnn As String
-    Dim provider As String
-    Dim dataSource As String
-    
-    provider = Environ$("PROVIDER")
-    dataSource = Environ$("DATA_SOURCE")
-    
-    If provider = Empty Or dataSource = Empty Then
-        Err.Raise 80000, Description:="Provider o data source not found"
+    If Not config Is Nothing Then
+        str = config.ConnectionString
+    Else
+        With self.cnn
+            .provider = Environ$("PROVIDER")
+            .Properties("Data Source") = ThisWorkbook.Path & Environ$("DATA_SOURCE")
+'            .Properties("Extended Properties") = Environ$("EXTENDED_PROPERTIES")
+            str = .ConnectionString
+        End With
     End If
     
-'    strCnn = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & ThisWorkbook.Path & "\books.accdb"
-    strCnn = "Provider=" & provider & ";Data Source=" & ThisWorkbook.Path & dataSource
+    createStrConnection = str
+    
+End Function
+Function connect(Optional config As ADODB.Connection)
+
+    Dim strCnn As String
+    
+    strCnn = createStrConnection(config)
     
     On Error GoTo Catch
     

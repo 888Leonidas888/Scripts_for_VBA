@@ -1,4 +1,23 @@
 Attribute VB_Name = "demo"
+Sub connect_with_config()
+
+    Dim st As New Storage
+    Dim config As New ADODB.Connection
+      
+    With config
+        .provider = "Microsoft.ACE.OLEDB.12.0"
+        .Properties("Data Source") = ThisWorkbook.Path & "\db\books.accdb"
+'        .Properties("Data Source") = ThisWorkbook.Path & "\Huach-Prod-Lindley.ShipmentLine-2024-09-03-23.14.xlsm"
+'        .Properties("Extended Properties") = "Excel 12.0 Macro;HDR=YES"
+'        .Properties("Extended Properties") = "Excel 12.0 Xml;HDR=YES"
+    End With
+      
+    With st
+        .connect config
+        .disconnect
+    End With
+    
+End Sub
 Sub connect_and_disconnect()
     
     Dim st As New Storage
