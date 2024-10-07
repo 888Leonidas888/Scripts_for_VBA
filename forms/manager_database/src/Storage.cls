@@ -7,11 +7,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
-Public Enum st_operator
-    ST_AND = 0
-    ST_OR = 1
-End Enum
-
 Private Type objADODB
     cnn As ADODB.Connection
     rs As ADODB.Recordset
@@ -32,9 +27,8 @@ Private Function createStrConnection(Optional config As ADODB.Connection) As Str
         str = config.ConnectionString
     Else
         With self.cnn
-            .provider = Environ$("PROVIDER")
-            .Properties("Data Source") = ThisWorkbook.Path & Environ$("DATA_SOURCE")
-'            .Properties("Extended Properties") = Environ$("EXTENDED_PROPERTIES")
+            .provider = "Microsoft.ACE.OLEDB.12.0"
+            .Properties("Data Source") = ThisWorkbook.Path & "\db\books.accdb"
             str = .ConnectionString
         End With
     End If
@@ -236,43 +230,35 @@ Function update(tableName As String, filterParams As Dictionary, params As Dicti
 Catch:
    handleError
 End Function
-Private Function generateConditionSQL(params As Dictionary, operator As st_operator) As String
+Function customQuery(sql) As ADODB.Recordset
+    
+    On Error GoTo Catch
+    
+    With self
+        .cnn.CursorLocation = adUseClient
+        Set customQuery = .cnn.Execute(sql)
+    End With
+    
+    Exit Function
+    
+Catch:
+    handleError
+End Function
+Private Function generateConditionSQL(params As Dictionary, Optional operador = " AND ") As String
 
     Dim conditions() As Variant
     Dim i As Integer
     Dim sql As String
-    Dim op As String
-    Const OP_AND As String = " AND "
-    Const OP_OR As String = " OR "
-    
+
     ReDim conditions(params.Count - 1)
     
     For Each k In params.Keys
-        conditions(i) = k & " = " & convertToFieldValid(params(k))
+        conditions(i) = k & " = " & params(k)
         i = i + 1
     Next k
     
-    Select Case operator
-        Case Is = ST_AND
-            op = OP_AND
-        Case Is = ST_OR
-            op = OP_OR
-    End Select
-    
-    sql = Join(conditions, op)
+    sql = Join(conditions, operador)
     generateConditionSQL = sql
-    
-End Function
-Private Function convertToFieldValid(value As Variant) As String
-    
-    Select Case True
-        Case IsDate(value)
-            convertToFieldValid = "#" & Format(value, "mm/dd/yyyy") & "#"
-        Case IsNumeric(value)
-            convertToFieldValid = value
-        Case Else
-            convertToFieldValid = "'" & value & "'"
-    End Select
     
 End Function
 Private Function handleError()

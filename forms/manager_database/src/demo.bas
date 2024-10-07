@@ -1,23 +1,28 @@
 Attribute VB_Name = "demo"
-Sub connect_with_config()
+Sub connect_with_config_any()
 
     Dim st As New Storage
-    Dim config As New ADODB.Connection
-      
-    With config
-        .provider = "Microsoft.ACE.OLEDB.12.0"
-        .Properties("Data Source") = ThisWorkbook.Path & "\db\books.accdb"
-'        .Properties("Data Source") = ThisWorkbook.Path & "\Huach-Prod-Lindley.ShipmentLine-2024-09-03-23.14.xlsm"
-'        .Properties("Extended Properties") = "Excel 12.0 Macro;HDR=YES"
-'        .Properties("Extended Properties") = "Excel 12.0 Xml;HDR=YES"
-    End With
-      
+ 
+    On Error GoTo Catch
+    
     With st
-        .connect config
+        .connect connectionManager.toSQLServer
         .disconnect
     End With
     
+    Exit Sub
+    
+Catch:
+
+    With Err
+        Debug.Print .Number
+        Debug.Print .Description
+    End With
+    
+    st.disconnect
+    
 End Sub
+
 Sub connect_and_disconnect()
     
     Dim st As New Storage
@@ -56,15 +61,15 @@ Sub insert_new_record()
     
     'create dictionary with fields and values to insert
     With params
-        .Add "name_book", UCase("aplicaciones vba con excel")
-        .Add "author", UCase("manuel torres remon")
-        .Add "isbn", "978-60-762-2551-6"
-        .Add "editorial", UCase("editorial macro")
-        .Add "date_published", 2013
+        .Add "name_book", UCase("sql los fundamentos del lenguaje")
+        .Add "author", UCase("anne christine bisson")
+        .Add "isbn", "978-2-409-03037-6"
+        .Add "editorial", UCase("eni")
+        .Add "date_published", 2019
         .Add "badge", UCase("pen")
-        .Add "price", 128.49
-        .Add "created_at", #8/9/2024#
-        .Add "updated_at", #8/9/2024#
+        .Add "price", 137.12
+        .Add "created_at", #10/6/2024#
+        .Add "updated_at", #10/6/2024#
     End With
     
     'call instance of storage for insert record
@@ -83,13 +88,11 @@ Sub update_record()
     
     'create dictionary with fields and values to update
     With filterParams
-        .Add "author", "franck ebel"
-        .Add "editorial", "epsilon"
-        .Add "created_at", #9/8/2024#
+        .Add "id", 29
     End With
     
     With params
-        .Add "badge", UCase("DOL")
+        .Add "price", 159.72
     End With
     
     On Error GoTo Catch
@@ -149,7 +152,7 @@ Sub delete_record()
     Dim filterParams As New Dictionary
 
     With filterParams
-        .Add "id", 26
+        .Add "id", 28
     End With
     
     With st
